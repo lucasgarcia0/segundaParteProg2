@@ -1,5 +1,7 @@
 import React, { Component } from "react";
-import { StyleSheet,  Text,  TextInput,  View,} from "react-native";
+import { StyleSheet, TouchableOpacity,} from "react-native";
+import { Text, TextInput, View } from "react-native-web"
+
 import { auth, db } from "../firebase/config";
 
 class Register extends Component {
@@ -38,30 +40,30 @@ class Register extends Component {
   
         render() {
             return (
-              <View>
+              <View style= {styles.container}>
                 <Text>Registro</Text>
-                <TextInput
+                <TextInput style={styles.field}
                   keyboardType="default"
                   placeholder="Ingrese su nombre de usuario"
                   onChangeText={(text) => this.setState({ userName: text })}
                   value={this.state.userName}
                 />
 
-                <TextInput
+                <TextInput  style={styles.field}
                   keyboardType="email-address"
                   placeholder="Ingrese su dirección de email"
                   onChangeText={(text) => this.setState({ email: text })}
                   value={this.state.email}
                 />
                
-                <TextInput
+                <TextInput  style={styles.field}
                   placeholder="Ingrese su contraseña"
                   secureTextEntry={true}
                   onChangeText={(text) => this.setState({ password: text })}
                   value={this.state.password}
                 />
                 
-                <TouchableOpacity
+                <TouchableOpacity 
                   onPress={() => this.handleSubmit()}
                   style={[styles.button, styles.buttonSecondary]}
                 >
@@ -79,5 +81,42 @@ class Register extends Component {
           }
 
 }  
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        paddingLeft: 10,
+        paddingRight: 10,
+        marginTop: 20,
+        alignContent:'center',
+        width: '80vw',
 
+    },
+    field: {
+        height: 20,
+        paddingTop: 15,
+        paddingBottom: 15,
+        paddingLeft: 10,
+        paddingRight: 10,
+        borderColor: '#ccc',
+        borderStyle: 'solid',
+        borderRadius: 6,
+        marginTop: 10,
+        marginBottom: 10,
+        borderWidth: 1
+
+    },
+    button: {
+        backgroundColor: "#51b9e9",
+        borderRadius: 5,
+        padding: 10,
+        width: "100%",
+        alignItems: "center",
+        marginTop: 10,
+      },
+      buttonSecondary: {
+        backgroundColor: "#ffa500",
+      },
+
+
+});
 export default Register
