@@ -59,14 +59,13 @@ class Post extends Component {
                     data={this.state.posts}
                     keyExtractor={item => item.id.toString()}
                     renderItem={({ item }) => <View>
-                        <Text>Posteado por {item.data.owner}: 
-                         {item.data.post}</Text>
+                        <Text>Posteado por {item.data.owner}: {item.data.post}</Text>
                         
                         <TouchableOpacity onPress=  {() => item.data.likes.includes(auth.currentUser.email)==false ? this.likePost(item.id): this.unlikePost(item.id)} style={styles.button}>
                             <Text> {item.data.likes.includes(auth.currentUser.email)==false ? 'Like': "Unlike"} </Text> 
                         </TouchableOpacity>
                         <Text>Me gustas: {item.data.likes.length}</Text>
-                        <Text>Ususarios que likearon: {item.data.likes}, </Text> 
+                        <Text>Ususarios que likearon: {item.data.likes} </Text> 
                     </View>}
                 />
             </View>
@@ -76,34 +75,39 @@ class Post extends Component {
 }
 const styles = StyleSheet.create({
     container: {
-        paddingLeft: 10,
-        paddingRight: 10,
-        marginTop: 20,
+      padding: 15,
+      backgroundColor: "#ffffff",
+      borderRadius: 8,
+      borderWidth: 1,
+      borderColor: "#ddd",
+      marginVertical: 10,
+      marginHorizontal: 15,
     },
     field: {
-        paddingTop: 5,
-        paddingBottom: 5,
-        paddingLeft: 10,
-        paddingRight: 10,
-        marginTop: 10,
-        marginBottom: 10,
+      padding: 10,
+      marginBottom: 10,
+      backgroundColor: "#f9f9f9",
+      borderRadius: 5,
     },
     title: {
-        marginLeft: 3,
+      fontSize: 16,
+      fontWeight: "bold",
+      color: "#333",
+      marginBottom: 5,
     },
     button: {
-        backgroundColor: '#28a745',
-        paddingLeft: 10,
-        paddingRight: 10,
-        paddingTop: 6,
-        paddingBottom: 6,
-        alignText: 'center',
-        borderRadius: 4,
-        borderWidth: 1,
-        borderColor: '#ccc',
-        borderStyle: '#28a745',
-    }
-
-
-});
+      backgroundColor: "#007bff",
+      paddingVertical: 6,
+      paddingHorizontal: 15,
+      borderRadius: 4,
+      alignSelf: "flex-start",
+      marginTop: 5,
+    },
+    buttonText: {
+      color: "#fff",
+      fontSize: 14,
+      fontWeight: "bold",
+    },
+  });
+  
 export default Post

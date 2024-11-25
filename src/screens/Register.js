@@ -19,7 +19,7 @@ class Register extends Component {
     componentDidMount() {
         auth.onAuthStateChanged((user) => {
           if (user) {
-            this.props.navigation.navigate("Home"); // Esto es para q los q ya estan logueados no puedan entrar 
+            this.props.navigation.navigate("Home");  
           }
         });
       }
