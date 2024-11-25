@@ -13,19 +13,16 @@ class Filter extends Component {
   }
 
   componentDidMount() {
-    db.collection("users")
-      .get()
-      .then((querySnapshot) => {
-        let users = [];
-        querySnapshot.forEach((doc) => {
-          users.push({
-            id: doc.id,
-            data: doc.data(),
-          });
+    db.collection("users").onSnapshot((docs) => {
+      let users = [];
+      docs.forEach((doc) => {
+        users.push({
+          id: doc.id,
+          data: doc.data(),
         });
-        this.setState({ users, filteredUsers: users });
-      })
-      .catch((error) => console.error("Error al obtener usuarios:", error));
+      });
+      this.setState({ users, filteredUsers: users });
+    });
   }
 
   handleSearch(text) {
