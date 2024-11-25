@@ -15,9 +15,11 @@ class Post extends Component {
     }
 
     componentDidMount() {
-        db.collection('posts').onSnapshot(
+        db.collection('posts')
+        .orderBy('createdAt', 'desc')
+        .onSnapshot(
             docs => {
-                let publis = [];               
+                let publis = [];
                 docs.forEach(doc => {
                     publis.push({
                         id: doc.id,
@@ -37,7 +39,7 @@ class Post extends Component {
                 likes: firebase.firestore.FieldValue.arrayUnion(auth.currentUser.email)
             })
             .then(() => {
-                this.setState({ publiLikeada:true })
+                this.setState({ publiLikeada: true })
             })
     }
     unlikePost(postId) {
@@ -47,7 +49,7 @@ class Post extends Component {
                 likes: firebase.firestore.FieldValue.arrayRemove(auth.currentUser.email)
             })
             .then(() => {
-                this.setState({ publiLikeada:false })
+                this.setState({ publiLikeada: false })
             })
     }
     render() {
@@ -60,12 +62,15 @@ class Post extends Component {
                     keyExtractor={item => item.id.toString()}
                     renderItem={({ item }) => <View>
                         <Text>Posteado por {item.data.owner}: {item.data.post}</Text>
-                        
-                        <TouchableOpacity onPress=  {() => item.data.likes.includes(auth.currentUser.email)==false ? this.likePost(item.id): this.unlikePost(item.id)} style={styles.button}>
-                            <Text> {item.data.likes.includes(auth.currentUser.email)==false ? 'Like': "Unlike"} </Text> 
+
+                        <TouchableOpacity onPress={() => item.data.likes.includes(auth.currentUser.email) == false ? this.likePost(item.id) : this.unlikePost(item.id)} style={styles.button}>
+                            <Text> {item.data.likes.includes(auth.currentUser.email) == false ? 'Like' : "Unlike"} </Text>
                         </TouchableOpacity>
                         <Text>Me gustas: {item.data.likes.length}</Text>
-                        <Text>Ususarios que likearon: {item.data.likes} </Text> 
+                        <Text>Usuarios que likearon:</Text><FlatList style={styles.field}
+                            data={item.data.likes}
+                            keyExtractor={(index) => index.toString()}
+                            renderItem={({ item }) => <Text>{item} </Text>} />
                     </View>}
                 />
             </View>
@@ -75,39 +80,39 @@ class Post extends Component {
 }
 const styles = StyleSheet.create({
     container: {
-      padding: 15,
-      backgroundColor: "#ffffff",
-      borderRadius: 8,
-      borderWidth: 1,
-      borderColor: "#ddd",
-      marginVertical: 10,
-      marginHorizontal: 15,
+        padding: 15,
+        backgroundColor: "#ffffff",
+        borderRadius: 8,
+        borderWidth: 1,
+        borderColor: "#ddd",
+        marginVertical: 10,
+        marginHorizontal: 15,
     },
     field: {
-      padding: 10,
-      marginBottom: 10,
-      backgroundColor: "#f9f9f9",
-      borderRadius: 5,
+        padding: 10,
+        marginBottom: 10,
+        backgroundColor: "#f9f9f9",
+        borderRadius: 5,
     },
     title: {
-      fontSize: 16,
-      fontWeight: "bold",
-      color: "#333",
-      marginBottom: 5,
+        fontSize: 16,
+        fontWeight: "bold",
+        color: "#333",
+        marginBottom: 5,
     },
     button: {
-      backgroundColor: "#007bff",
-      paddingVertical: 6,
-      paddingHorizontal: 15,
-      borderRadius: 4,
-      alignSelf: "flex-start",
-      marginTop: 5,
+        backgroundColor: "#007bff",
+        paddingVertical: 6,
+        paddingHorizontal: 15,
+        borderRadius: 4,
+        alignSelf: "flex-start",
+        marginTop: 5,
     },
     buttonText: {
-      color: "#fff",
-      fontSize: 14,
-      fontWeight: "bold",
+        color: "#fff",
+        fontSize: 14,
+        fontWeight: "bold",
     },
-  });
-  
+});
+
 export default Post

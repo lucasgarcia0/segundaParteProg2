@@ -6,7 +6,8 @@ class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      userPosts: [], 
+      userPosts: [],
+      UsuariodelProfile: [], 
     };
   }
 
@@ -22,6 +23,18 @@ class Profile extends Component {
           });
         });
         this.setState({ userPosts });
+      });
+      db.collection("users")
+      .where("email", "==", auth.currentUser.email)
+      .onSnapshot((docs) => {
+        let UsuariodelProfile = [];
+        docs.forEach((doc) => {
+          UsuariodelProfile.push({
+            id: doc.id,
+            data: doc.data(),
+          });
+        });
+        this.setState({ UsuariodelProfile });
       });
   }
 
@@ -50,7 +63,7 @@ class Profile extends Component {
     return (
       <View style={styles.container}>
         <Text style={styles.title}>Perfil</Text>
-        <Text style={styles.info}>Nombre de usuario: {auth.currentUser.userName || "Sin nombre"}</Text>
+        <Text style={styles.info}>Nombre de usuario: {this.state.UsuariodelProfile.length>0 ? this.state.UsuariodelProfile[0].data.usuario : "Sin nombre"}</Text>
         <Text style={styles.info}>Email: {auth.currentUser.email}</Text>
         <Text style={styles.info}>Total de posteos: {userPosts.length}</Text>
 

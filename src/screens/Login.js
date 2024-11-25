@@ -15,7 +15,11 @@ class Login extends Component {
   }
 
   componentDidMount(){
-    auth.onAuthStateChanged(user => console.log('El usuario es:', JSON.stringify(user,null,4)))
+    auth.onAuthStateChanged((user) => {
+        if (user) {
+          this.props.navigation.navigate("HomeMenu");  
+        }
+      });
   }
 
   handleSubmit() {
@@ -45,17 +49,12 @@ class Login extends Component {
         <TouchableOpacity onPress={() => this.handleSubmit() }  style={[styles.button, styles.buttonSecondary]}>
           <Text>Acceder</Text>
         </TouchableOpacity>
-        <Text>Navegación cruzada a Register: </Text>
         <TouchableOpacity
           onPress={() => this.props.navigation.navigate("Register")}
           style={styles.button}
         >
           <Text>No tengo cuenta</Text>
         </TouchableOpacity>
-        <Text>
-          Navegación cruzada a ingresar a la app. Este paso se hará
-          automaticamente cuando veamos la funcionalidad de loguin{" "}
-        </Text>      
       </View>
     );
   }
