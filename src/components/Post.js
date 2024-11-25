@@ -67,7 +67,7 @@ class Post extends Component {
                             <Text> {item.data.likes.includes(auth.currentUser.email) == false ? 'Like' : "Unlike"} </Text>
                         </TouchableOpacity>
                         <Text>Me gustas: {item.data.likes.length}</Text>
-                        <Text>Usuarios que likearon:</Text><FlatList style={styles.field}
+                        {item.data.likes.length > 0 ? <Text>Usuarios que likearon:</Text>: ""}<FlatList style={styles.field}
                             data={item.data.likes}
                             keyExtractor={(index) => index.toString()}
                             renderItem={({ item }) => <Text>{item} </Text>} />
