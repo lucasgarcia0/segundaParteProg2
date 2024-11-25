@@ -51,7 +51,7 @@ class Filter extends Component {
           value={search}
           onChangeText={(text) => this.handleSearch(text)}
         />
-        {filteredUsers.length > 0 ? (
+        {filteredUsers.length > 0 && this.state.search !== "" ? (
           <FlatList
             data={filteredUsers}
             keyExtractor={(item) => item.id}
