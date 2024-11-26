@@ -80,6 +80,8 @@ class Post extends Component {
 }
 const styles = StyleSheet.create({
     container: {
+        width:'100%',
+        flex:1,
         padding: 15,
         backgroundColor: "#ffffff",
         borderRadius: 8,

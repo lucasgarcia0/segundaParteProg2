@@ -98,7 +98,8 @@ class Profile extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    width:'100%',
+    flex:1,    
     padding: 20,
     backgroundColor: "#fff",
   },
