@@ -33,7 +33,12 @@ class Login extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>Ingresar</Text>
+        <Text style={styles.titulo}t>Ingresar</Text>
+
+        {this.state.error ? (
+          <Text style={styles.errorText}>{this.state.error}</Text>
+        ) : null}
+        
         <TextInput  style={styles.field}
           keyboardType="email-address"
           placeholder="Ingrese su dirección de email"
@@ -70,6 +75,11 @@ const styles = StyleSheet.create({
         width: '80vw',
 
     },
+    titulo: {
+        fontSize: 24,
+        fontWeight: "bold",
+        marginBottom: 20,
+    },
     field: {
         height: 20,
         paddingTop: 15,
@@ -95,6 +105,11 @@ const styles = StyleSheet.create({
       buttonSecondary: {
         backgroundColor: "#ffa500",
       },
+      errorText: {
+        color: "red",
+        fontSize: 12,
+        marginBottom: 10,
+      }
 
 
 });
