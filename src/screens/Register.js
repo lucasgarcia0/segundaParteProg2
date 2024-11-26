@@ -123,7 +123,6 @@ const styles = StyleSheet.create({
         marginBottom: 20,
     },
     field: {
-        width: "90%",
         height: 40,
         borderColor: "#ccc",
         borderWidth: 1,
@@ -136,15 +135,11 @@ const styles = StyleSheet.create({
         backgroundColor: "#51b9e9",
         borderRadius: 5,
         padding: 10,
-        width: "90%",
         alignItems: "center",
         marginTop: 10,
     },
     buttonSecondary: {
         backgroundColor: "#ffa500",
-    },
-    buttonText: {
-        fontWeight: "bold",
     },
     errorText: {
         color: "red",
