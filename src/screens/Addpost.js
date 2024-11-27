@@ -30,7 +30,11 @@ class Addpost extends Component {
                     placeholder='Escribi tu nuevo posteo...'
                     onChangeText={text => this.setState({ post: text })}
                     value={this.state.post} />
-                <TouchableOpacity onPress={() => this.addPost()} style={styles.button}>
+                <TouchableOpacity onPress={() => {
+                    this.addPost();
+                    this.props.navigation.navigate('Home'); 
+                }}
+                    style={styles.button}>
                     <Text style={styles.buttonText}> Agrega tu post </Text>
                 </TouchableOpacity>
 
